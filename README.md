@@ -123,7 +123,6 @@ Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch1 
 ```
 default-lease-time 300
 max-lease-time 6900;
-
 ```
 
 **Switch 2**
@@ -137,6 +136,8 @@ max-lease-time 6900;
 Loid dan Franky berencana menjadikan Eden sebagai server untuk pertukaran informasi dengan alamat IP yang tetap dengan IP [prefix IP].3.13
 
 ### Jawaban
+
+---
 
 ### Ketentuan Proxy
 1. Client hanya dapat mengakses internet diluar (selain) hari & jam kerja (senin-jumat 08.00 - 17.00) dan hari libur (dapat mengakses 24 jam penuh)
