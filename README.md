@@ -68,7 +68,7 @@ Ostania sebagai DHCP Relay
 apt-get update
 apt-get install isc-dhcp-relay -y
 ```
-
+---
 ### Soal 3 dan 4
 Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.50 - [prefix IP].1.88 dan [prefix IP].1.120 - [prefix IP].1.155. Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.10 - [prefix IP].3.30 dan [prefix IP].3.60 - [prefix IP].3.85
 
@@ -103,6 +103,7 @@ subnet 10.49.3.0  netmask 255.255.255.0 {
 service isc-dhcp-server restart
 ```
 
+---
 ### Soal 5
 Client mendapatkan DNS dari WISE dan client dapat terhubung dengan internet melalui DNS tersebut.
 
@@ -113,6 +114,7 @@ Client mendapatkan DNS dari WISE dan client dapat terhubung dengan internet mela
 echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
+---
 ### Soal 6
 Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch1 selama 5 menit sedangkan pada client yang melalui Switch3 selama 10 menit. Dengan waktu maksimal yang dialokasikan untuk peminjaman alamat IP selama 115 menit.
 
@@ -130,6 +132,31 @@ default-lease-time 600;
 max-lease-time 6900;
 ```
 
+---
 ### Soal 7
+Loid dan Franky berencana menjadikan Eden sebagai server untuk pertukaran informasi dengan alamat IP yang tetap dengan IP [prefix IP].3.13
 
-### Soal 8
+### Jawaban
+
+### Ketentuan Proxy
+1. Client hanya dapat mengakses internet diluar (selain) hari & jam kerja (senin-jumat 08.00 - 17.00) dan hari libur (dapat mengakses 24 jam penuh)
+
+2. Adapun pada hari dan jam kerja sesuai nomor (1), client hanya dapat mengakses domain loid-work.com dan franky-work.com (IP tujuan domain dibebaskan)
+
+3. Saat akses internet dibuka, client dilarang untuk mengakses web tanpa HTTPS. (Contoh web HTTP: http://example.com)
+
+4. Agar menghemat penggunaan, akses internet dibatasi dengan kecepatan maksimum 128 Kbps pada setiap host (Kbps = kilobit per second; lakukan pengecekan pada tiap host, ketika 2 host akses internet pada saat bersamaan, keduanya mendapatkan speed maksimal yaitu 128 Kbps)
+
+5. Setelah diterapkan, ternyata peraturan nomor (4) mengganggu produktifitas saat hari kerja, dengan demikian pembatasan kecepatan hanya diberlakukan untuk pengaksesan internet pada hari libur
+
+
+Setelah proxy Berlint diatur oleh Loid, dia melakukan pengujian dan mendapatkan hasil sesuai tabel berikut.
+
+
+|                   Aksi                  |   Senin (10.00)  |       Senin (20.00)      | Sabtu (10.00) |
+|:---------------------------------------:|:----------------:|:------------------------:|:-------------:|
+| Akses internet (HTTP)                   |         x        |             x            |       x       |
+| Akses internet (HTTPS)                  |         x        |             v            |       v       |
+| Akses loid-work.com dan franky-work.com |         v        |             x            |       x       |
+| Speed limit (128Kbps)                   | Tidak bisa akses | x (Speed Tidak Dibatasi) |       x       |
+
