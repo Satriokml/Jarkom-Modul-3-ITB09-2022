@@ -1,6 +1,6 @@
 # Jarkom-Modul-3-ITB09-2022
 
-Laporan Resmi Praktikum Jaringan Komunikasi Modul 2
+Laporan Resmi Praktikum Jaringan Komunikasi Modul 3
 
 ---
 
