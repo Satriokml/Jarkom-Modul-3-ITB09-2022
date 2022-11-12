@@ -195,3 +195,9 @@ acl franky dstdomain franky-work.com
 http_access allow loid
 http_access allow franky
 ```
+
+# Pembagian Tugas
+Nama | Pembagian Tugas
+--- | ---
+Satrio Kamil Widhiwoso | 1 - 4
+Rama Muhammad Murshal | 5 - 8
