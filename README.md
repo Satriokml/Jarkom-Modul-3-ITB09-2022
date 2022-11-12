@@ -136,6 +136,17 @@ max-lease-time 6900;
 Loid dan Franky berencana menjadikan Eden sebagai server untuk pertukaran informasi dengan alamat IP yang tetap dengan IP [prefix IP].3.13
 
 ### Jawaban
+**Eden**
+```
+echo '
+auto eth0
+iface eth0 inet dhcp
+hwaddress ether e2:d4:b7:c3:af:96
+' > /etc/network/interfaces
+```
+`e2:d4:b7:c3:af:96` adalah hwaddress dari Eden
+![hwaddress](./images/hwaddress.png)
+
 
 ---
 
@@ -161,3 +172,26 @@ Setelah proxy Berlint diatur oleh Loid, dia melakukan pengujian dan mendapatkan 
 | Akses loid-work.com dan franky-work.com |         v        |             x            |       x       |
 | Speed limit (128Kbps)                   | Tidak bisa akses | x (Speed Tidak Dibatasi) |       x       |
 
+### Jawaban
+1. Pada Berlint, edit `acl.conf` menjadi 
+```
+acl AVAILABLE_WORKING time MTWHF 00:00-07:59
+acl AVAILABLE_WORKING time MTWHF 17:01-23:59
+acl AVAILABLE_WORKING time SA 00:00-23:59
+```
+dan `squid.conf` menjadi 
+```
+include /etc/squid/acl.conf
+http_port 8080
+http_access allow AVAILABLE_WORKING
+http_access deny all
+visible_hostname Berlint
+```
+
+2. Pada `squid.conf` tambahkan 
+```
+acl loid dstdomain loid-work.com
+acl franky dstdomain franky-work.com
+http_access allow loid
+http_access allow franky
+```
